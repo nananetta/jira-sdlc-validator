@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jira FixVersion Issue Browser</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Release Traceability</div>
+        <h1>Jira FixVersion Issue Browser</h1>
+        <p class="hero-copy">
+          Simulated screen for fetching Jira Cloud issues by <strong>fixVersion</strong> and
+          <strong>system impact</strong>, showing root `SR-xxxx` issues, attachment details,
+          and a 3-level issue path.
+        </p>
+      </div>
+    </section>
+
+    <section class="filters">
+      <div class="filters-top">
+        <div>
+          <div class="filters-title">Filter Issues</div>
+          <div class="filters-subtitle">Simulates querying Jira Cloud with dropdown filters.</div>
+        </div>
+      </div>
+
+      <div class="filter-rows">
+        <div class="filter-grid filter-grid-top">
+          <div class="field">
+            <label for="fixVersion">Fix Version</label>
+            <select id="fixVersion">
+              <option value="all">All fix versions</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="systemImpact">System Impact</label>
+            <select id="systemImpact">
+              <option value="all">All system impacts</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-grid filter-grid-bottom">
+          <div class="field">
+            <label for="ticketStatus">Ticket Status</label>
+            <select id="ticketStatus">
+              <option value="all">All statuses</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="validationStatus">Validation Status</label>
+            <select id="validationStatus">
+              <option value="all">All validation states</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button class="primary-btn" id="applyFilters">Fetch Issues</button>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button class="ghost-btn" id="resetFilters">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-card">
+      <div>
+        <div class="filters-title">SR Status Dashboard</div>
+        <div class="filters-subtitle">Root-level `SR` distribution by current status.</div>
+      </div>
+      <div class="dashboard-stack">
+        <div class="dashboard-total compact-total">
+          <div>
+            <div class="stat-label">Total SR Issues</div>
+            <div class="stat-value" id="rootIssueCount">0</div>
+          </div>
+          <div class="summary-grid compact-grid">
+            <div class="stat compact-stat">
+              <div class="stat-label">Attachments</div>
+              <div class="stat-value" id="attachmentCount">0</div>
+            </div>
+            <div class="stat compact-stat">
+              <div class="stat-label">Level-1 Links</div>
+              <div class="stat-value" id="level1Count">0</div>
+            </div>
+          </div>
+        </div>
+        <div class="status-circles">
+          <div class="circle-card">
+            <div class="circle-wrap">
+              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
+                <circle class="circle-fill circle-open" id="openCircle" cx="60" cy="60" r="42"></circle>
+              </svg>
+              <div class="circle-center">
+                <div class="circle-value" id="openCount">0</div>
+                <div class="circle-unit">SR</div>
+              </div>
+            </div>
+            <div class="circle-label-row">
+              <span class="status-value status-open">Open</span>
+              <span class="circle-percent" id="openPercent">0%</span>
+            </div>
+          </div>
+          <div class="circle-card">
+            <div class="circle-wrap">
+              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
+                <circle class="circle-fill circle-progress" id="inProgressCircle" cx="60" cy="60" r="42"></circle>
+              </svg>
+              <div class="circle-center">
+                <div class="circle-value" id="inProgressCount">0</div>
+                <div class="circle-unit">SR</div>
+              </div>
+            </div>
+            <div class="circle-label-row">
+              <span class="status-value status-progress">In Progress</span>
+              <span class="circle-percent" id="inProgressPercent">0%</span>
+            </div>
+          </div>
+          <div class="circle-card">
+            <div class="circle-wrap">
+              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
+                <circle class="circle-fill circle-done" id="doneCircle" cx="60" cy="60" r="42"></circle>
+              </svg>
+              <div class="circle-center">
+                <div class="circle-value" id="doneCount">0</div>
+                <div class="circle-unit">SR</div>
+              </div>
+            </div>
+            <div class="circle-label-row">
+              <span class="status-value status-done">Done</span>
+              <span class="circle-percent" id="donePercent">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="results-header">
+        <div>
+          <div class="results-title">Search Results</div>
+          <div class="results-meta" id="resultsMeta">Loading mock Jira issues...</div>
+        </div>
+      </div>
+      <div class="issue-list" id="issueList"></div>
+    </section>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
