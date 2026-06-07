@@ -3,154 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jira FixVersion Issue Browser</title>
+  <title>SDLC Workflow Status Board</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="shell">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="eyebrow">Release Traceability</div>
-        <h1>Jira FixVersion Issue Browser</h1>
-        <p class="hero-copy">
-          Simulated screen for fetching Jira Cloud issues by <strong>fixVersion</strong> and
-          <strong>system impact</strong>, showing root `SR-xxxx` issues, attachment details,
-          and a 3-level issue path.
-        </p>
-      </div>
-    </section>
-
-    <section class="filters">
-      <div class="filters-top">
-        <div>
-          <div class="filters-title">Filter Issues</div>
-          <div class="filters-subtitle">Simulates querying Jira Cloud with dropdown filters.</div>
-        </div>
-      </div>
-
-      <div class="filter-rows">
-        <div class="filter-grid filter-grid-top">
-          <div class="field">
-            <label for="fixVersion">Fix Version</label>
-            <select id="fixVersion">
-              <option value="all">All fix versions</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="systemImpact">System Impact</label>
-            <select id="systemImpact">
-              <option value="all">All system impacts</option>
-            </select>
-          </div>
-        </div>
-        <div class="filter-grid filter-grid-bottom">
-          <div class="field">
-            <label for="ticketStatus">Ticket Status</label>
-            <select id="ticketStatus">
-              <option value="all">All statuses</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="validationStatus">Validation Status</label>
-            <select id="validationStatus">
-              <option value="all">All validation states</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>&nbsp;</label>
-            <button class="primary-btn" id="applyFilters">Fetch Issues</button>
-          </div>
-          <div class="field">
-            <label>&nbsp;</label>
-            <button class="ghost-btn" id="resetFilters">Reset</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="summary-card">
+  <div class="app-shell">
+    <header class="topbar">
       <div>
-        <div class="filters-title">SR Status Dashboard</div>
-        <div class="filters-subtitle">Root-level `SR` distribution by current status.</div>
+        <p class="eyebrow">Release Governance</p>
+        <h1>SDLC Workflow Status Board</h1>
       </div>
-      <div class="dashboard-stack">
-        <div class="dashboard-total compact-total">
-          <div>
-            <div class="stat-label">Total SR Issues</div>
-            <div class="stat-value" id="rootIssueCount">0</div>
-          </div>
-          <div class="summary-grid compact-grid">
-            <div class="stat compact-stat">
-              <div class="stat-label">Attachments</div>
-              <div class="stat-value" id="attachmentCount">0</div>
-            </div>
-            <div class="stat compact-stat">
-              <div class="stat-label">Level-1 Links</div>
-              <div class="stat-value" id="level1Count">0</div>
-            </div>
-          </div>
-        </div>
-        <div class="status-circles">
-          <div class="circle-card">
-            <div class="circle-wrap">
-              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
-                <circle class="circle-fill circle-open" id="openCircle" cx="60" cy="60" r="42"></circle>
-              </svg>
-              <div class="circle-center">
-                <div class="circle-value" id="openCount">0</div>
-                <div class="circle-unit">SR</div>
-              </div>
-            </div>
-            <div class="circle-label-row">
-              <span class="status-value status-open">Open</span>
-              <span class="circle-percent" id="openPercent">0%</span>
-            </div>
-          </div>
-          <div class="circle-card">
-            <div class="circle-wrap">
-              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
-                <circle class="circle-fill circle-progress" id="inProgressCircle" cx="60" cy="60" r="42"></circle>
-              </svg>
-              <div class="circle-center">
-                <div class="circle-value" id="inProgressCount">0</div>
-                <div class="circle-unit">SR</div>
-              </div>
-            </div>
-            <div class="circle-label-row">
-              <span class="status-value status-progress">In Progress</span>
-              <span class="circle-percent" id="inProgressPercent">0%</span>
-            </div>
-          </div>
-          <div class="circle-card">
-            <div class="circle-wrap">
-              <svg class="circle-chart" viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="circle-track" cx="60" cy="60" r="42"></circle>
-                <circle class="circle-fill circle-done" id="doneCircle" cx="60" cy="60" r="42"></circle>
-              </svg>
-              <div class="circle-center">
-                <div class="circle-value" id="doneCount">0</div>
-                <div class="circle-unit">SR</div>
-              </div>
-            </div>
-            <div class="circle-label-row">
-              <span class="status-value status-done">Done</span>
-              <span class="circle-percent" id="donePercent">0%</span>
-            </div>
-          </div>
-        </div>
+      <div class="release-chip">
+        <span>Typical lifecycle</span>
+        <strong>Idea to Operate</strong>
       </div>
-    </section>
+    </header>
 
-    <section class="results">
-      <div class="results-header">
-        <div>
-          <div class="results-title">Search Results</div>
-          <div class="results-meta" id="resultsMeta">Loading mock Jira issues...</div>
+    <main>
+      <section class="overview-band" aria-label="SDLC overview">
+        <div class="overview-copy">
+          <h2>Track phase movement, evidence, and gate readiness in one operational view.</h2>
+          <p>
+            The workflow below models a standard software delivery lifecycle: request intake,
+            analysis, design, build, testing, release approval, deployment, and post-release
+            operation.
+          </p>
         </div>
+        <div class="metric-strip" aria-label="Workflow summary">
+          <div>
+            <span class="metric-value" id="phaseCount">0</span>
+            <span class="metric-label">Phases</span>
+          </div>
+          <div>
+            <span class="metric-value" id="documentCount">0</span>
+            <span class="metric-label">Core Documents</span>
+            <span class="metric-detail" id="documentBreakdown">0 mandatory + 0 optional</span>
+          </div>
+          <div>
+            <span class="metric-value" id="gateCount">0</span>
+            <span class="metric-label">Approval Gates</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-layout" aria-live="polite">
+        <article class="phase-panel">
+          <div class="phase-panel-top">
+            <div>
+              <p class="phase-kicker" id="phaseKicker">Phase</p>
+              <h2 id="phaseName">Select a phase</h2>
+              <p id="phasePurpose"></p>
+            </div>
+            <span class="status-pill" id="phaseStatus">Status</span>
+          </div>
+
+          <div class="flow-card">
+            <div>
+              <span class="flow-label">Status Change</span>
+              <strong id="statusFrom">Draft</strong>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div>
+              <span class="flow-label">Target</span>
+              <strong id="statusTo">Approved</strong>
+            </div>
+          </div>
+
+          <div class="criteria-grid">
+            <section>
+              <h3>Entry Conditions</h3>
+              <ul id="entryList"></ul>
+            </section>
+            <section>
+              <h3>Exit Gate</h3>
+              <ul id="exitList"></ul>
+            </section>
+          </div>
+        </article>
+
+        <aside class="documents-panel">
+          <div class="section-heading compact">
+            <div>
+              <h2>Documents Needed</h2>
+              <p id="documentSummary"></p>
+            </div>
+          </div>
+          <div class="document-list" id="documentList"></div>
+        </aside>
+
+        <aside class="transitions-panel">
+          <div class="section-heading compact">
+            <div>
+              <p class="phase-kicker">Available Transitions</p>
+              <h2>Move Status</h2>
+              <p id="transitionSummary"></p>
+            </div>
+          </div>
+          <div class="transition-actions" id="transitionActions"></div>
+        </aside>
+      </section>
+
+      <section class="workflow-band" aria-label="Workflow">
+        <div class="section-heading">
+          <div>
+            <h2>Workflow</h2>
+            <p>Select a phase or transition to inspect movement, documents, owners, and exit criteria.</p>
+          </div>
+          <div class="workflow-heading-actions">
+            <div class="status-legend" id="statusLegend"></div>
+            <button class="reset-workflow-btn" id="resetWorkflow" type="button">Reset</button>
+          </div>
+        </div>
+        <div class="phase-rail" id="phaseRail"></div>
+
+        <div class="workflow-status-area" aria-label="Workflow status diagram">
+          <div class="status-diagram-wrap">
+            <svg class="status-diagram" id="statusDiagram" viewBox="0 0 1200 560" role="img" aria-labelledby="statusDiagramTitle statusDiagramDescription">
+              <title id="statusDiagramTitle">SDLC workflow status diagram</title>
+              <desc id="statusDiagramDescription">Workflow statuses connected by possible status changes.</desc>
+            </svg>
+          </div>
+          <div class="transition-list" id="transitionList"></div>
+        </div>
+      </section>
+
+      <section class="matrix-band" aria-label="Document matrix">
+        <div class="section-heading">
+          <div>
+            <h2>Document Matrix</h2>
+            <p>Baseline deliverables by phase, including the minimum evidence normally expected before handoff.</p>
+          </div>
+        </div>
+        <div class="matrix-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Status Movement</th>
+                <th>Mandatory Documents</th>
+                <th>Optional Documents</th>
+                <th>Approval / Evidence</th>
+              </tr>
+            </thead>
+            <tbody id="matrixBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="document-modal" id="documentModal" hidden>
+    <div class="document-modal-backdrop" data-close-document-modal></div>
+    <section class="document-modal-panel" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle">
+      <div class="document-modal-top">
+        <div>
+          <p class="phase-kicker" id="documentModalMeta">Document Index</p>
+          <h2 id="documentModalTitle">Document sample index</h2>
+        </div>
+        <button class="document-modal-close" id="documentModalClose" type="button" aria-label="Close document index">×</button>
       </div>
-      <div class="issue-list" id="issueList"></div>
+      <p class="document-modal-evidence" id="documentModalEvidence"></p>
+      <ol class="document-index-list" id="documentIndexList"></ol>
     </section>
   </div>
 

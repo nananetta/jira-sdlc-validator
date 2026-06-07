@@ -5,6 +5,7 @@
   "description": "Simple Node.js mock Jira issue browser",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "deploy:cloudflare": "npx wrangler pages deploy public"
   }
 }
