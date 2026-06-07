@@ -217,8 +217,8 @@ The Documents Needed panel derives documents from the current selected status. `
 
 Core phase document count:
 
-- Total core documents: `28`.
-- Mandatory documents: `22`.
+- Total core documents: `29`.
+- Mandatory documents: `23`.
 - Optional documents: `6`.
 - `Closed / Rejected` terminal documents are separate exception-status documents and are not included in the core phase document metric.
 
@@ -229,7 +229,7 @@ Current phase documents:
 | Intake & Triage | Business request form; Initial impact assessment; Backlog ticket |
 | Requirements | Business requirements document; User stories and acceptance criteria; Requirement traceability matrix |
 | Solution Design | Solution design document; API or integration contract (optional); Implementation plan (optional) |
-| Build | Technical task breakdown; Pull request review record; Unit test result; Build artifact manifest |
+| Build | Technical task breakdown; Pull request review record; Unit test result; Security scan results; Build artifact manifest |
 | Testing & Validation | Test plan; Test cases and execution result; Defect log |
 | UAT | UAT test scenarios; UAT execution result; UAT signoff |
 | Release Approval | Release notes; Change request; Deployment runbook; Rollback plan |

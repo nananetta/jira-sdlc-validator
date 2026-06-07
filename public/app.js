@@ -61,6 +61,7 @@ const phases = [
       { name: "Technical task breakdown", type: "Planning", required: true, evidence: "Linked tasks with estimates and assignees" },
       { name: "Pull request review record", type: "Evidence", required: true, evidence: "Reviewer approval and resolved comments" },
       { name: "Unit test result", type: "Evidence", required: true, evidence: "Automated test run linked to commit" },
+      { name: "Security scan results", type: "Evidence", required: true, evidence: "SAST, dependency, or container scan result linked to commit or build" },
       { name: "Build artifact manifest", type: "Release", required: true, evidence: "Version, commit SHA, package checksum" }
     ]
   },
@@ -414,6 +415,12 @@ const documentOverrides = {
     done: "Critical production checks have a pass/fail result and timestamp.",
     index: ["Smoke scope", "Execution result", "Timestamp and environment", "Issue follow-up"]
   },
+  "Security scan results": {
+    owner: "Engineering Lead",
+    reviewer: "Security Reviewer",
+    done: "Scan result is linked to the build and critical/high findings are resolved or accepted.",
+    index: ["Scan tool and scope", "Build or commit reference", "Findings summary", "Risk acceptance or remediation"]
+  },
   "Rejection rationale": {
     owner: "Product Owner",
     reviewer: "Requester",
@@ -666,6 +673,10 @@ function renderMetrics() {
   documentCountEl.textContent = phaseDocuments.length;
   documentBreakdownEl.textContent = `${requiredDocuments} mandatory + ${optionalDocuments} optional`;
   gateCountEl.textContent = phases.length;
+}
+
+function coreDocumentCount() {
+  return phases.reduce((sum, phase) => sum + phase.documents.length, 0);
 }
 
 function renderLegend() {
@@ -923,7 +934,7 @@ function renderSelectedPhase() {
   entryListEl.innerHTML = createList(phase.entry);
   exitListEl.innerHTML = createList(phase.exit);
   documentSummaryEl.textContent = terminalStatusDetails[currentStatusId]
-    ? `${detail.documents.length} exception documents for ${currentStatus.label}. Not included in the 28 core document metric.`
+    ? `${detail.documents.length} exception documents for ${currentStatus.label}. Not included in the ${coreDocumentCount()} core document metric.`
     : `${detail.documents.length} documents, ${requiredCount} required for ${currentStatus.label}.`;
   documentListEl.innerHTML = detail.documents
     .map((document, index) => {
