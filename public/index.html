@@ -149,6 +149,34 @@
           </table>
         </div>
       </section>
+
+      <section class="moment-test-band" aria-label="Moment locale test">
+        <div class="section-heading">
+          <div>
+            <h2>Moment Locale Test</h2>
+            <p>Compare <code>moment().format('DD/MMM/YYYY')</code> against the browser locale and selected Moment locales.</p>
+          </div>
+          <button class="reset-workflow-btn" id="refreshMomentTest" type="button">Refresh</button>
+        </div>
+
+        <div class="moment-test-grid">
+          <article class="moment-result-card">
+            <span class="moment-label">Active Moment Locale</span>
+            <strong id="momentActiveLocale">-</strong>
+            <code id="momentActiveOutput">-</code>
+          </article>
+          <article class="moment-result-card">
+            <span class="moment-label">Browser Device Locale</span>
+            <strong id="browserLocale">-</strong>
+            <code id="momentBrowserOutput">-</code>
+          </article>
+          <label class="moment-result-card moment-locale-control">
+            <span class="moment-label">Selected Moment Locale</span>
+            <select id="momentLocaleSelect" aria-label="Select Moment locale"></select>
+            <code id="momentSelectedOutput">-</code>
+          </label>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -167,6 +195,7 @@
     </section>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/min/moment-with-locales.min.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

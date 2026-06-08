@@ -463,6 +463,13 @@ const documentModalMetaEl = document.getElementById("documentModalMeta");
 const documentModalEvidenceEl = document.getElementById("documentModalEvidence");
 const documentIndexListEl = document.getElementById("documentIndexList");
 const documentModalCloseBtn = document.getElementById("documentModalClose");
+const momentActiveLocaleEl = document.getElementById("momentActiveLocale");
+const momentActiveOutputEl = document.getElementById("momentActiveOutput");
+const browserLocaleEl = document.getElementById("browserLocale");
+const momentBrowserOutputEl = document.getElementById("momentBrowserOutput");
+const momentLocaleSelectEl = document.getElementById("momentLocaleSelect");
+const momentSelectedOutputEl = document.getElementById("momentSelectedOutput");
+const refreshMomentTestBtn = document.getElementById("refreshMomentTest");
 
 let selectedPhaseId = phases[0].id;
 let currentStatusId = "open";
@@ -999,10 +1006,73 @@ function renderMatrix() {
     .join("");
 }
 
+function formatMomentWithLocale(locale) {
+  const activeLocale = moment.locale();
+  const formatted = moment().locale(locale).format("DD/MMM/YYYY");
+  moment.locale(activeLocale);
+  return formatted;
+}
+
+function populateMomentLocaleSelect() {
+  if (typeof moment === "undefined") {
+    return;
+  }
+
+  const candidateLocales = [
+    moment.locale(),
+    navigator.language,
+    ...(navigator.languages || []),
+    "en",
+    "th",
+    "ja",
+    "fr",
+    "de",
+    "id",
+    "zh-cn"
+  ].filter(Boolean);
+
+  const availableLocales = moment.locales();
+  const locales = [...new Set(candidateLocales.map(locale => locale.toLowerCase()))]
+    .filter(locale => availableLocales.includes(locale));
+
+  momentLocaleSelectEl.innerHTML = locales
+    .map(locale => `<option value="${locale}">${locale}</option>`)
+    .join("");
+
+  momentLocaleSelectEl.value = locales.includes(navigator.language.toLowerCase())
+    ? navigator.language.toLowerCase()
+    : moment.locale();
+}
+
+function renderMomentLocaleTest() {
+  const browserLocale = navigator.language || "Unknown";
+  const browserLanguages = Array.from(navigator.languages || [browserLocale]).join(", ");
+
+  browserLocaleEl.textContent = browserLanguages;
+
+  if (typeof moment === "undefined") {
+    momentActiveLocaleEl.textContent = "Moment unavailable";
+    momentActiveOutputEl.textContent = "moment is not loaded";
+    momentBrowserOutputEl.textContent = "-";
+    momentSelectedOutputEl.textContent = "-";
+    return;
+  }
+
+  const selectedLocale = momentLocaleSelectEl.value || moment.locale();
+
+  momentActiveLocaleEl.textContent = moment.locale();
+  momentActiveOutputEl.textContent = moment().format("DD/MMM/YYYY");
+  momentBrowserOutputEl.textContent = formatMomentWithLocale(browserLocale);
+  momentSelectedOutputEl.textContent = formatMomentWithLocale(selectedLocale);
+}
+
 resetWorkflowBtn.addEventListener("click", () => {
   selectStatus("open");
   render();
 });
+
+refreshMomentTestBtn.addEventListener("click", renderMomentLocaleTest);
+momentLocaleSelectEl.addEventListener("change", renderMomentLocaleTest);
 
 documentModalCloseBtn.addEventListener("click", closeDocumentModal);
 documentModalEl.querySelector("[data-close-document-modal]").addEventListener("click", closeDocumentModal);
@@ -1021,6 +1091,8 @@ function render() {
   renderTransitionList();
   renderSelectedPhase();
   renderMatrix();
+  renderMomentLocaleTest();
 }
 
+populateMomentLocaleSelect();
 render();

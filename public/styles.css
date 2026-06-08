@@ -114,7 +114,8 @@ main {
 .phase-panel,
 .documents-panel,
 .transitions-panel,
-.matrix-band {
+.matrix-band,
+.moment-test-band {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -188,7 +189,8 @@ main {
 }
 
 .workflow-band,
-.matrix-band {
+.matrix-band,
+.moment-test-band {
   padding: 22px;
 }
 
@@ -1028,6 +1030,61 @@ tr:last-child td {
   border-bottom: 0;
 }
 
+.moment-test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.moment-result-card {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.moment-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.moment-result-card strong {
+  min-height: 24px;
+  font-size: 18px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.moment-result-card code {
+  display: block;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1f2937;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.moment-locale-control select {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
 @media (max-width: 1120px) {
   .phase-rail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1040,6 +1097,10 @@ tr:last-child td {
 
   .transition-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .moment-test-grid {
+    grid-template-columns: 1fr;
   }
 
   .metric-strip {
@@ -1077,7 +1138,8 @@ tr:last-child td {
   .phase-panel,
   .documents-panel,
   .transitions-panel,
-  .matrix-band {
+  .matrix-band,
+  .moment-test-band {
     padding: 16px;
   }
 
