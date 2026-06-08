@@ -6,6 +6,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "deploy:cloudflare": "npx wrangler pages deploy public"
+    "deploy:cloudflare": "npx wrangler pages deploy public",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.98.0"
   }
 }
